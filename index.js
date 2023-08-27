@@ -274,13 +274,13 @@ Object.defineProperties(Date.prototype, {
 
 // EXPORTABLE FUNCTIONS
 
-export const isInteger = num			  => { let newInt = parseInt(num); return isNaN(newInt) ? false : newInt == num; }
-export const isFloat = num 				  => !isNaN(parseFloat(num));
-export const isClass = entity 			  => entity.prototype?.constructor?.toString()?.substring(0, 5) === 'class';
-export const isNullable = data 			  => data === undefined || data === null;
-export const isType = (data, type) 		  => data === undefined || data === null || typeof data == type;
-export const isTypeNotNull = (data, type) => data !== undefined && data !== null && typeof data == type;
-export const isTypeStringNotEmpty = data  => typeof data == "string" && data.length > 0;
+export const isInteger = num				=> !isNaN(num) && parseInt(num) == num;
+export const isFloat = num					=> !isNaN(num) && parseFloat(num) == num;
+export const isClass = entity				=> entity.prototype?.constructor?.toString()?.substring(0, 5) === 'class';
+export const isNullable = data				=> data === undefined || data === null;
+export const isType = (data, type)			=> data === undefined || data === null || typeof data == type;
+export const isTypeNotNull = (data, type)	=> data !== undefined && data !== null && typeof data == type;
+export const isTypeStringNotEmpty = data	=> typeof data == "string" && data.length > 0;
 
 export const wait = (time=1) => new Promise(resolve => setTimeout(resolve, time));
 export const thread = func => new Promise((async resolve => await wait().then(async () => resolve(await func()))));
