@@ -65,5 +65,5 @@ import "@ijx/utils-base"
 - decimalAdjust(value, exp=0, type="round")
 - secondsToDhms(seconds)
 - stringifyNoCircular(obj, space=null)
-- readArgs(validArgs: object, initChar: string, defaultBool: boolean)
+- readArgs(validArgs: object, initChar="-", defaultBool=false)
 - replaceSqlValues(sqlQuery: string, data: (string | number | null)[])

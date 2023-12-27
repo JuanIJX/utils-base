@@ -306,9 +306,21 @@ export const decToHex = num => {
 	var cad = parseInt(num).toString(16);
 	return (cad.length === 1) ? `0${cad}` : `${cad}`;
 }
-
+/**
+ * Convierte un dato a base64
+ * 
+ * @param data Dato para convertir
+ * @returns {string} Cadena de base64
+ */
 export const base64_encode = data => Buffer.from(data).toString('base64');
-export const base64_decode = data => Buffer.from(data, 'base64').toString('ascii');
+/**
+ * Convierte una cadena de base64 a Buffer. Este se puede
+ * convertir a string con .toString('ascii')
+ * 
+ * @param {string} data Dato para convertir
+ * @returns {Buffer} Buffer de salida
+ */
+export const base64_decode = data => Buffer.from(data, 'base64');
 
 /**
  * Ajuste decimal de un número.
@@ -355,6 +367,7 @@ export const stringifyNoCircular = (obj, space=null) => {
  * @param {object} validArgs Objeto con los datos, los keys serán el nombre
  * para buscar y el valor será el tipo. 0 = boolean, 1 = string, 2 = integer, 3 = float
  * @param {string} initChar Caracter inicial de los parámetros, default -
+ * @param {boolean} defaultBool Si es true establece un valor default a false en los boolean, default false
  * @returns Objeto con los datos leídos
  */
 export const readArgs = (validArgs, initChar="-", defaultBool = false) => {

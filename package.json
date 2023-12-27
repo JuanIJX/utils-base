@@ -1,6 +1,6 @@
 {
   "name": "@ijx/utils-base",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "Utilidades varias (base)",
   "main": "index.js",
   "type": "module",
@@ -12,5 +12,8 @@
     "utils"
   ],
   "author": "JuanIJX",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.10.5"
+  }
 }
