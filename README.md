@@ -29,6 +29,7 @@ import "@ijx/utils-base"
 	- assign(obj)
 	- defObject(fuente)
 	- forEach(fn, thisArg)
+	- filter(fn, thisArg)
 	- map(fn, thisArg)
 	- getName()
 	- getMethods()

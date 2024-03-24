@@ -96,6 +96,18 @@ Object.defineProperties(Object.prototype, {
 		return this;
 
 	}, configurable: true, writable: true },
+	"filter": { value: function(fn, thisArg) {
+		if (typeof fn !== "function")
+			throw new TypeError(`${fn} is not a function`);
+		if (thisArg !== void 0)
+			fn = fn.bind(thisArg);
+		const arry = {};
+		for (const key in this)
+			if(Object.hasOwnProperty.call(this, key) && fn(this[key], key, this))
+				arry[key] = this[key];
+		return arry;
+
+	}, configurable: true, writable: true },
 	"map": { value: function(fn, thisArg) {
 		if (typeof fn !== "function")
 			throw new TypeError(`${fn} is not a function`);
