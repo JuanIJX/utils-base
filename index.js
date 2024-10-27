@@ -116,7 +116,7 @@ Object.defineProperties(Object.prototype, {
 		const arry = [];
 		for (const key in this)
 			if(Object.hasOwnProperty.call(this, key))
-				arry.push(fn(key, this[key], this));
+				arry.push(fn(this[key], key, this));
 		return arry;
 
 	}, configurable: true, writable: true },
