@@ -120,6 +120,28 @@ Object.defineProperties(Object.prototype, {
 		return arry;
 
 	}, configurable: true, writable: true },
+	"some": { value: function(fn, thisArg) {
+		if (typeof fn !== "function")
+			throw new TypeError(`${fn} is not a function`);
+		if (thisArg !== void 0)
+			fn = fn.bind(thisArg);
+		for (const key in this)
+			if(Object.hasOwnProperty.call(this, key))
+				if(fn(this[key], key, this))
+					return true;
+		return false;
+	}, configurable: true, writable: true },
+	"find": { value: function(fn, thisArg) {
+		if (typeof fn !== "function")
+			throw new TypeError(`${fn} is not a function`);
+		if (thisArg !== void 0)
+			fn = fn.bind(thisArg);
+		for (const key in this)
+			if(Object.hasOwnProperty.call(this, key))
+				if(fn(this[key], key, this))
+					return this[key];
+		return undefined;
+	}, configurable: true, writable: true },
 	"getName": { value: function() {
 		const results = (/function (.{1,})\(/).exec((this).constructor.toString());
 		return (results && results.length > 1) ? results[1] : "";
