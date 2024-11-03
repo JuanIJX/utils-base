@@ -106,7 +106,6 @@ Object.defineProperties(Object.prototype, {
 			if(Object.hasOwnProperty.call(this, key) && fn(this[key], key, this))
 				arry[key] = this[key];
 		return arry;
-
 	}, configurable: true, writable: true },
 	"map": { value: function(fn, thisArg) {
 		if (typeof fn !== "function")
@@ -118,7 +117,6 @@ Object.defineProperties(Object.prototype, {
 			if(Object.hasOwnProperty.call(this, key))
 				arry.push(fn(this[key], key, this));
 		return arry;
-
 	}, configurable: true, writable: true },
 	"some": { value: function(fn, thisArg) {
 		if (typeof fn !== "function")
@@ -308,6 +306,7 @@ Object.defineProperties(Date.prototype, {
 
 // EXPORTABLE FUNCTIONS
 
+export const NOOP = () => {};
 export const isInteger = num				=> !isNaN(num) && parseInt(num) == num;
 export const isFloat = num					=> !isNaN(num) && parseFloat(num) == num;
 export const isClass = entity				=> entity.prototype?.constructor?.toString()?.substring(0, 5) === 'class';
@@ -333,7 +332,6 @@ export const makeid = (length=5) => {
 		result += characters.charAt(Math.floor(Math.random() * characters.length));
 	return result;
 }
-
 /**
  * Convierte un int en string hexadecimal
  * 
@@ -359,7 +357,6 @@ export const base64_encode = data => Buffer.from(data).toString('base64');
  * @returns {Buffer} Buffer de salida
  */
 export const base64_decode = data => Buffer.from(data, 'base64');
-
 /**
  * Ajuste decimal de un número.
  * 
@@ -374,7 +371,6 @@ export const decimalAdjust = (value, exp=0, type="round") => {
 	const mult = Math.pow(10, exp >=0 ? parseInt(exp) : 0);
 	return Math[type](value * mult) / mult;
 }
-
 export const secondsToDhms = seconds => {
 	seconds = Number(seconds);
 	return {
@@ -394,6 +390,33 @@ export const stringifyNoCircular = (obj, space=null) => {
 		return value;
 	}, space);
 }
+export const replaceSqlValues = (sqlQuery, data) => data.reduce((previous, current) => previous.replace("?", current == null ? "null" : `'${current}'`), sqlQuery);
+export const isJson = text => /^[\],:{}\s]*$/.test(text.replace(/\\["\\\/bfnrtu]/g, '@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').replace(/(?:^|:|,)(?:\s*\[)+/g, ''));
+export const escapeHtml   = str => str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+export const unescapeHtml = str => str.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, "\"").replace(/&#039;/g, "'");
+/**
+ * Convierte un número usando los prefijos del sistema internacional
+ * Ejemplo: 1024 = 1 K
+ * 
+ * @param value: Valor que se va a transformar
+ * @param divisor: Cantidad por la que se va a dividir el valor original
+ * @param redondeo: Redondeo que se utilizará al dividir
+ * @param mults: Lista de símbolos que retornará en cada caso
+ * @return Número con su símbolo
+ */
+export const metricPrefix = (value, divisor = 1024, redondeo = 2, mults = ["K", "M", "G", "T", "P", "E", "Z"]) => {
+	const nRound = Math.pow(10, redondeo);
+	var ml = -1;
+	while (value >= divisor && ml < mults.length - 1) {
+		value /= divisor;
+		ml++;
+	}
+	return (Math.round(value * nRound) / nRound) + (ml > -1 && mults[ml]!="" ? " " + mults[ml] : "");
+};
+
+
+
+/* ONLY NodeJS */
 
 /**
  * Lectura de parámetros de arranque al ejecutar un script.
@@ -440,5 +463,3 @@ export const readArgs = (validArgs, initChar="-", defaultBool = false) => {
 				config[key] = false;
 	return config;
 }
-
-export const replaceSqlValues = (sqlQuery, data) => data.reduce((previous, current) => previous.replace("?", current == null ? "null" : `'${current}'`), sqlQuery);
