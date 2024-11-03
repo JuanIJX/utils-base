@@ -1,6 +1,6 @@
 {
   "name": "@ijx/utils-base",
-  "version": "1.0.18",
+  "version": "1.0.20",
   "description": "Utilidades varias (base)",
   "main": "index.js",
   "type": "module",
@@ -9,7 +9,9 @@
     "url": "https//github.com/JuanIJX/utils-base"
   },
   "keywords": [
-    "utils"
+    "utils",
+    "utilities",
+    "functions"
   ],
   "author": "JuanIJX",
   "license": "ISC",
