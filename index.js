@@ -317,7 +317,6 @@ export const isTypeStringNotEmpty = data	=> typeof data == "string" && data.leng
 export const wait = (time=1) => new Promise(resolve => setTimeout(resolve, time));
 export const thread = func => new Promise((async resolve => await wait().then(async () => resolve(await func()))));
 export const echo = cad => cad ? console.log(cad) : console.log();
-export const getTimestamp = () => Math.floor(Func.getSysMs() / 1000);
 export const getDate = (...t) => new Date(...t);
 export const basename = (path, sep="/") => path.split(sep).pop();
 export const dirname = (path, sep="/") => {
