@@ -217,85 +217,46 @@ Object.defineProperties(Date.prototype, {
 		for (let i = 0; i < format.length; i++) {
 			// https://www.php.net/manual/es/function.date.php
 			switch(format[i]) {
-				// AÑO
-				case "Y": // Una representación numérica completa de un año, 4 dígitos	Ejemplos: 1999 o 2003
-					cad += this.getFullYear();
-					break;
-				case "y": // Una representación de dos dígitos de un año
-					cad += this.getFullYear().zeroPad(2);
-					break;
-	
-				// MES
-				case "m": // Representación numérica de un mes, con ceros iniciales	01 hasta 12
-					cad += (this.getMonth() + 1).zeroPad(2);
-					break;
-				case "n": // Representación numérica de un mes, sin ceros iniciales
-					cad += this.getMonth() + 1;
-					break;
-				case "M": // Una representación textual corta de un mes, tres letras
-					cad += mes[this.getMonth()].slice(0, 3);
-					break;
-				case "F": // Una representación textual completa de un mes, como Enero o Marzo
-					cad += mes[this.getMonth()];
-					break;
-	
-				// DIA
-				case "j": // Día del mes sin ceros iniciales 1 a 31
-					cad += this.getDate();
-					break;
-				case "d": // Día del mes, 2 dígitos con ceros iniciales	01 a 31
-					cad += this.getDate().zeroPad(2);
-					break;
-				case "D": // Una representación textual de un día, tres letras	Lunes hasta Domingo
-					cad += semana[this.getDay() - 1].slice(0, 3);
-					break;
-	
-				// AM / PM
-				case "a": // Ante meridiem y Post meridiem en minúsculas
-					cad += this.getHours() >= 12 ? "pm" : "am";
-					break;
-				case "A": // Ante meridiem y Post meridiem en mayúsculas
-					cad += this.getHours() >= 12 ? "PM" : "AM";
-					break;
-	
-				// HORA
-				case "g": // Formato de 12 horas de una hora sin ceros iniciales
-					aux = this.getHours() % 12;
-					cad += aux == 0 ? 12 : aux;
-					break;
-				case "G": // Formato de 24 horas de una hora sin ceros iniciales
-					cad += this.getHours();
-					break;
-				case "h": // Formato de 12 horas de una hora con ceros iniciales
-					aux = this.getHours() % 12;
-					cad += (aux == 0 ? 12 : aux).zeroPad(2);
-					break;
-				case "H": // Formato de 24 horas de una hora con ceros iniciales
-					cad += this.getHours().zeroPad(2);
-					break;
-				
-				// MINUTO
-				case "i": // Minutos con ceros iniciales
-					cad += this.getMinutes().zeroPad(2);
-					break;
-				
-				// SEGUNDO
-				case "s": // Segundos con ceros iniciales
-					cad += this.getSeconds().zeroPad(2);
-					break;
-				
-				// MILISEGUNDO
-				case "v": // Milisegundos
-					cad += this.getMilliseconds();
-					break;
-				case "V": // Milisegundos con 3 ceros iniciales
-					cad += this.getMilliseconds().zeroPad(3);
-					break;
-				
+				// AÑO: Una representación numérica completa de un año, 4 dígitos. Ejemplos: 1999 o 2003
+				case "Y": cad += this.getFullYear(); break;
+				// AÑO: Una representación de dos dígitos de un año
+				case "y": cad += this.getFullYear().zeroPad(2); break;
+				// MES: Representación numérica de un mes, con ceros iniciales	01 hasta 12
+				case "m": cad += (this.getMonth() + 1).zeroPad(2); break;
+				// MES: Representación numérica de un mes, sin ceros iniciales
+				case "n": cad += this.getMonth() + 1; break;
+				// MES: Una representación textual corta de un mes, tres letras
+				case "M": cad += mes[this.getMonth()].slice(0, 3); break;
+				// MES: Una representación textual completa de un mes, como Enero o Marzo
+				case "F": cad += mes[this.getMonth()]; break;
+				// DIA: Día del mes sin ceros iniciales 1 a 31
+				case "j": cad += this.getDate(); break;
+				// DIA: Día del mes, 2 dígitos con ceros iniciales	01 a 31
+				case "d": cad += this.getDate().zeroPad(2); break;
+				// DIA: Una representación textual de un día, tres letras	Lunes hasta Domingo
+				case "D": cad += semana[this.getDay() - 1].slice(0, 3); break;
+				// AM / PM: Ante meridiem y Post meridiem en minúsculas
+				case "a": cad += this.getHours() >= 12 ? "pm" : "am"; break;
+				// AM / PM: Ante meridiem y Post meridiem en mayúsculas
+				case "A": cad += this.getHours() >= 12 ? "PM" : "AM"; break;
+				// HORA: Formato de 12 horas de una hora sin ceros iniciales
+				case "g": aux = this.getHours() % 12; cad += aux == 0 ? 12 : aux; break;
+				// HORA: Formato de 24 horas de una hora sin ceros iniciales
+				case "G": cad += this.getHours(); break;
+				// HORA: Formato de 12 horas de una hora con ceros iniciales
+				case "h": aux = this.getHours() % 12; cad += (aux == 0 ? 12 : aux).zeroPad(2); break;
+				// HORA: Formato de 24 horas de una hora con ceros iniciales
+				case "H": cad += this.getHours().zeroPad(2); break;
+				// MINUTO: Minutos con ceros iniciales
+				case "i": cad += this.getMinutes().zeroPad(2); break;
+				// SEGUNDO: Segundos con ceros iniciales
+				case "s": cad += this.getSeconds().zeroPad(2); break;
+				// MILISEGUNDO: Milisegundos
+				case "v": cad += this.getMilliseconds(); break;
+				// MILISEGUNDO: Milisegundos con 3 ceros iniciales
+				case "V": cad += this.getMilliseconds().zeroPad(3); break;
 				// Caracteres
-				default:
-					cad += format[i];
-					break;
+				default: cad += format[i]; break;
 			}
 		}
 		return cad;
