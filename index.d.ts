@@ -61,7 +61,7 @@ declare module '@ijx/utils' {
 	 * @param mults: Lista de símbolos que retornará en cada caso
 	 * @return Número con su símbolo
 	 */
-	export function metricPrefix(value: number, divisor: number, redondeo: number, mults: array|undefined): string;
+	export function metricPrefix(value: number, divisor: number, redondeo: number, mults: string[]|undefined): string;
 	/**
 	 * Lectura de parámetros de arranque al ejecutar un script.
 	 * Ejemplo:
