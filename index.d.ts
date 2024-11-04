@@ -1,4 +1,5 @@
-declare module '@ijx/utils' {	
+declare module '@ijx/utils' {
+	export function NOOP(): void;
 	export function isInteger(num: any): boolean;
 	export function isFloat(num: any): boolean;
 	export function isClass(entity: any): boolean;
@@ -9,8 +10,9 @@ declare module '@ijx/utils' {
 	export function wait(time: number): Promise<void>;
 	export function thread(func: Function): Promise<void>;
 	export function echo(cad: string): void;
-	export function getTimestamp(): number;
 	export function getDate(...t: any): Date;
+	export function basename(path: string, sep: string): string;
+	export function dirname(path: string, sep: string): string;
 	export function makeid(length?: number): string;
 	/**
 	 * Convierte un int en string hexadecimal
@@ -45,7 +47,21 @@ declare module '@ijx/utils' {
 	export function decimalAdjust(value: number, exp?: number, type?: string): number;
 	export function secondsToDhms(seconds: number): Object;
 	export function stringifyNoCircular(obj: Object, space?: string|null): string;
-
+	export function replaceSqlValues(sqlQuery: string, data: (string | number | null)[]): string;
+	export function isJson(text: string): boolean;
+	export function escapeHtml(str: string): string;
+	export function unescapeHtml(str: string): string;
+	/**
+	 * Convierte un número usando los prefijos del sistema internacional
+	 * Ejemplo: 1024 = 1 K
+	 * 
+	 * @param value: Valor que se va a transformar
+	 * @param divisor: Cantidad por la que se va a dividir el valor original
+	 * @param redondeo: Redondeo que se utilizará al dividir
+	 * @param mults: Lista de símbolos que retornará en cada caso
+	 * @return Número con su símbolo
+	 */
+	export function metricPrefix(value: number, divisor: number, redondeo: number, mults: array|undefined): string;
 	/**
 	 * Lectura de parámetros de arranque al ejecutar un script.
 	 * Ejemplo:
@@ -60,5 +76,4 @@ declare module '@ijx/utils' {
 	 * @returns Objeto con los datos leídos
 	 */
 	export function readArgs(validArgs: Object, initChar?: string, defaultBool?: boolean): Object;
-	export function replaceSqlValues(sqlQuery: string, data: (string | number | null)[]): string;
 }
